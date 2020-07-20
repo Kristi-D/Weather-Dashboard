@@ -4,8 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div id = "app">
+        <div class ="holder headline">
+          Weather Dashboard
+        </div>
+        <div class ="holder zip">
+          <label for="zip">Enter Zipcode here</label>
+          <input type="text" id="zip" placeholder="enter zip code here">
+          <button id="generate" type = "submit"> Generate </button>
+        </div>
+        <div class ="holder entry">
+          <div class = "title">Most Recent Entry</div>
+         <div id = "entryHolder">
+          <div id = "date"></div> 
+         <div id = "temp"></div>
+         <div id = "content"></div>
+        </div>
+        </div>
+        </div>
+      <script src="app.js" type="text/javascript"></script>
 </body>
 </html>
