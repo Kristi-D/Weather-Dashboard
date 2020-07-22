@@ -1,68 +1,127 @@
-// Personal API Key for OpenWeatherMap API
-const appID = '1a09117c381d114e53ab829670509f6603abc80fcfd';
-const baseURL = 'api.openweathermap.org/data/2.5/forecast?zip=&appid';
+$("#currentDay").text(moment().format("dddd, MMMM DD, YYYY"));
 
-// Create a new date instance dynamically with JS
-let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+let city=""; 
+let url="";
+let queryurl ="";
+let currenturl = "";
+let citiesDiv = document.getElementById("searched_cities_container");
 
-// Event listener to add function to existing HTML DOM element
-document.getElementById('generate').addEventListener('click', calculateResults);
-
-/* Function called by event listener */
-function calculateResults(event) {
-    const zipCode = document.getElementById('zip').value;
+let cities = []; 
     
-    getWeatherData(baseURL, zipCode, appID)
-    .then(function(data) {
-        let date = new Date(data.dt * 1000)
-        let date_str = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
-        postData('/add', {temperature: data.main.temp, date: date_str, userResponse: userResponse});
-        updateUI('/all');
-    })
-};
+    listClicker(); 
+    searchClicker(); 
 
-/* Function to GET Web API Data */
-const getWeatherData = async (baseURL, zipCode, appID) => {
-    const response  = await fetch(
-        baseURL + zipCode + '&appid=' + appID + '&units=imperial');
-    try {
-        const data = await response.json();
-        return data;
-    } catch(error) {
-        console.log('error', error);
-    };
-};
+function init(){
+    let saved_cities = JSON.parse(localStorage.getItem("cities"));
 
-/* Function to POST data */
-const postData = async (url = '', data = {}) => {
-    const response = await fetch(url, {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: {
-            'Content-Type':'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(data),
-    });
+        if (saved_cities !== null){
+        cities = saved_cities
+        }   
+        renderButtons(); 
+}
 
-    try {
-        const newData = await response.json();
-        return newData;
-    } catch(error) {
-        console.log('error', error);
-    };
-};
+function storeCities(){
+    localStorage.setItem("cities", JSON.stringify(cities)); 
+}
+function renderButtons(){
+    citiesDiv.innerHTML=" "; 
+    if(cities === null){
+    return;
+    }
+    let unique_cities = [...new Set(cities)];
+    for(let i=0; i < unique_cities.length; i++){
+        let cityName = unique_cities[i]; 
 
-/* Function to GET Project Data */
-const updateUI = async(url='') => {
-    const request = await fetch(url);
-    try {
-        const allData = await request.json();
-        document.getElementById('date').innerHTML = allData[0].date;
-        document.getElementById('temp').innerHTML = allData[0].temperature;
-        document.getElementById('content').innerHTML = allData[0].userResponse;
-    } catch(error) {
-        console.log('error', error);
-    };
-};
+        let buttonEl = document.createElement("button");
+        buttonEl.textContent = cityName; 
+        buttonEl.setAttribute("class", "listbtn"); 
+
+        citiesDiv.appendChild(buttonEl);
+        listClicker();
+      }
+}
+function listClicker(){
+    $(".listbtn").on("click", function(event){
+        console.log("anybody home?")
+        event.preventDefault();
+        console.log("hello?");
+        city = $(this).text().trim();
+        APIcalls(); 
+        })
+    }
+
+function searchClicker() {
+    $("#searchbtn").on("click", function(event){
+        event.preventDefault();
+        city = $(this).prev().val().trim()
+                
+                //push the city user entered into cities array 
+                cities.push(city);
+                //make sure cities array.length is never more than 8 
+                if(cities.length > 8){
+                    cities.shift()
+                }
+                //return from function early if form is blank
+                if (city == ""){
+                    return; 
+                }
+                APIcalls();
+                storeCities(); 
+                renderButtons();
+        })
+    }
+
+function APIcalls(){
+    
+    url = "https://api.openweathermap.org/data/2.5/forecast?q=";    
+    currenturl = "https://api.openweathermap.org/data/2.5/weather?q=";
+    APIkey = "d114e53ab829670509f6603abc80fcfd";
+    queryurl = url + city + APIkey;
+    current_weather_url = currenturl + city + APIkey; 
+         
+    $("#name_of_city").text("Today's Weather in " + city);
+    $.ajax({
+    url: queryurl,
+    method: "GET",
+                    
+    }).then(function(response){
+                    let day_number = 0; 
+                    for(let i=0; i< response.list.length; i++){
+            
+                        //split function to isolate the time from the time/data aspect of weather data, and only select weather reports for 3pm
+                        if(response.list[i].dt_txt.split(" ")[1] == "15:00:00")
+                        {
+                            //if time of report is 3pm, populate text areas accordingly
+                            let day = response.list[i].dt_txt.split("-")[2].split(" ")[0];
+                            let month = response.list[i].dt_txt.split("-")[1];
+                            let year = response.list[i].dt_txt.split("-")[0];
+                            $("#" + day_number + "date").text(month + "/" + day + "/" + year); 
+                            let temp = Math.round(((response.list[i].main.temp - 273.15) *9/5+32));
+                            $("#" + day_number + "five_day_temp").text("Temp: " + temp + String.fromCharCode(176)+"F");
+                            $("#" + day_number + "five_day_humidity").text("Humidity: " + response.list[i].main.humidity);
+                            $("#" + day_number + "five_day_icon").attr("src", "http://openweathermap.org/img/w/" + response.list[i].weather[0].icon + ".png");
+                            console.log(response.list[i].dt_txt.split("-"));
+                            console.log(day_number);
+                            console.log(response.list[i].main.temp);
+                            day_number++; 
+                                    }   
+                    }
+                });
+                
+                $.ajax({
+                    url:current_weather_url,
+                    method: "GET", 
+                }).then(function(current_data){
+                    console.log(current_data);
+                    let temp = Math.round(((current_data.main.temp - 273.15) * 9/5 + 32))
+                    console.log("The temperature in " + city + " is: " + temp);
+                    $("#today_temp").text("Temperature: " + temp + String.fromCharCode(176)+"F");
+                    $("#today_humidity").text("Humidity: " + current_data.main.humidity);
+                    $("#today_wind_speed").text("Wind Speed: " + current_data.wind.speed);
+                    $("#today_icon_div").attr({"src": "http://openweathermap.org/img/w/" + current_data.weather[0].icon + ".png",
+                     "height": "100px", "width":"100px"});
+                })
+               
+           
+           }
+           

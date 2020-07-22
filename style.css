@@ -1,86 +1,50 @@
-body{
-    background: #fffff8;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-}
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1;
+  }
 
-#app{
-    display: grid;
-    grid-auto-rows: minmax(150px, auto);
-    /* grid-template-columns:  */
-    height:100vh;
-    background: #e7e6e6;
-    color: #215357;
-    justify-content: center;
-    grid-gap: 1em;
-    font-size: 20px;
-    font-family: 'Oswald', sans-serif;
-}
-
-.holder{
-
-}
-
-.entry{
-    background: rgba(59, 74, 107, .4);
-}
-
-#entryHolder{
-
-}
-
-#date{
-
-}
-
-#temp{
-
-}
-
-#content{
-
-}
-
-.headline {
-
-}
-.title{
-
-}
-
-/*  Basic Styling To Override Default For Basic HTML Elements */
-label{
-    display:block;
-    font-size: 27px;
-}
-
-input{
-    display:block;
-    height: 60px;
-    width: 320px;
-    background:#22b2da;
-    color: #f0d43a;
-    font-size: 20px;
-    font-family: 'Oswald', sans-serif;
+  .jumbotron {
+    text-align: center;
+    background-color: transparent;
+    color: rgb(42, 160, 130);
+    border-radius: 0;
+    border-bottom: 10px solid black;
+  }
+  textarea{
+    background: transparent;
     border: none;
+    resize: none;
+    color: #000000;
+    border-left: 1px solid black;
+    padding: 10px;
+  }
+  .listbtn{
+    background-color: #3d6488;
+    color: white;
+    font-family: 'Open Sans Condensed', sans-serif;
+    border-radius: 2px; 
+    margin-left: 20%;
+    margin-right: 20%;
+    width: 60%;
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 
-button{
-    width: 400px;
-    height: 100px;
-    background: #3b4a6b;
-    color: #f0d43a;
-    font-size: 26px;
-    font-family: 'Oswald', sans-serif;
-    border: none;
-    box-shadow: 1px 2px 3px #444;
-}
-h1{
-    font-size: 36px;
+.left_div{
+    /* background-color: #e2d9be;  */
+    height: 100%; 
 }
 
-textarea{
-    background:#22b2da;
-    color: #f0d43a;
-    font-size: 20px;
-    font-family: 'Oswald', sans-serif;
+.card-body{
+    background-color: #3d6488;
+    color: white;
+}
+
+#searchbtn{
+    background-color: #3d6488;
+    color: white;
+    font-family: 'Open Sans Condensed', sans-serif;
+    border-radius: 2px; 
+    
 }
