@@ -1,5 +1,4 @@
-// calls the local time display 
-localTimeDisplay();
+$("#currentDay").text(moment().format("dddd, MMMM DD, YYYY"));
 
 // SEARCH BUTTON
 // calls the request function with the user input value 
@@ -92,21 +91,18 @@ function requestAjax(cityName) {
     });
 
 
+    checkWidth();
 
-}
-//********************************************** */
-
-
-
-// THIS FUNCTION DISPLAYS LOCAL TIME 
-// in the dashboard
-//********************************************** */
-function localTimeDisplay() {
-
-    // current day, month, day, year, time time running the seconds
-    $("#currentDay").text(moment().format("hh:mm:ss a"));
-
-    setInterval(function () {
-        $("#currentDay").text(moment().format("hh:mm:ss a"));
-    }, 1000);
+    // This function makes the dates typography responsive 
+    function checkWidth() {
+        if ($(window).width() > 763) {
+            $('.cards').removeClass('display-4');
+            $('.descriptionWeight').addClass('font-weight-light');
+        }
+        else {
+            $('.cards').addClass('display-4');
+        }
+    }
+    
+    $(window).resize(checkWidth);
 }

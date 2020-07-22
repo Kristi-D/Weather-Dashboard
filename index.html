@@ -13,13 +13,10 @@
 </head>
 
 <body>
-
-
-    <!-- NAV -->
-    <nav class="navbar bg-danger border border-danger rounded-lg">
-        <div><h1 class=" text-white">Weather Dashboard</h1></div>
-        <div class=" text-white" id="currentDay"></div>
-    </nav>
+    <header class="jumbotron">
+        <h1 class="display-4">Weather Dashboard</h1>
+        <p id="currentDay" class="lead"></p>
+    </header>
 
     <div class="container-fluid">
         <div class="row">
@@ -27,61 +24,56 @@
             <div class="col-12 col-lg-3 mt-3">
                 <div class="row ">
                     <!-- SEARCH INPUT -->
-                    <div class="col-12">
+                    <div class="jumbotron">
                         <h4 class="font-weight-bold">Search For a City:</h4>
                         <div class="input-group input-group-lg ">
                             <input class="form-control  input-group-lg border border-primary" id="cityInputValue"
                                 type="search" placeholder="Type City Here..." aria-label="Search">
                         </div>
-                    </div>
-                    <div class="col-4 mt-2">
-                        <!-- CLEAR HISTORY BUTTON  -->
-                        <button class="btn btn-lg btn-block btn-danger my-2 my-sm-0" id="clearHistoryBtn"
-                            type="submit">Clear</button>
-                    </div>
-                    <div class="col-8 mt-2">
+                        <div class="col-8 mt-2">
                         <!-- SEARCH BUTTON  -->
                         <button class="btn btn-lg btn-block btn-danger my-2 my-sm-0 px-5" id="searchCity"
                             type="submit">Search</button>
-                    </div>
-                    <!-- searched cities HISTORY -->
-                    <div class="col-12 mt-2 ">
-                        <div class="list-group searchHistory">
-                        </div>
+                        </div>    
                     </div>
                 </div>
-            </div>
+            </div>      
             <!-- THE FORECAST  -->
-            <div class="col-12 col-lg-9 mt-3">
+            <div class="col-12 col-md-9 mt-3">
                 <div class="row">
                     <!-- FORECAST JUMBOTRON-->
                     <div class="col-12">
-                        <div
-                            class="jumbotron jumbotron-fluid pb-4 pt-2 px-4 font-weight-bold bg-primary border border-primary rounded-lg">
-                            <h1 class="display-4"><span class="city"></span> (<span class="day0"></span>)</h1>
+                        <div class="jumbotron">
+                            <h1 class="display-4"><span class="city"></span></h1>
                             <div><img src='#' alt='weather Icon' class="img-fluid mt-2 icon1"><span
                                     class="description0"></span>
                             </div>
+                            <div class="mt-3">Temperature : <span class="temp0"></span>&deg;F</div>
                             <div class="mt-3">Wind Speeds : <span class="wind"></span> MPH</div>
                             <div class="mt-3">Humidity : <span class="humidity0"></span>%</div>
-                            <div class="mt-3">Temperature : <span class="temp0"></span>&deg;F</div>
+                            
                           </div>
                     </div>
                 </div>
                 <!-- 5-DAY FORECAST  -->
-                <div class="col-12">
-                    <h1 class="ml-n3">5-Day forecast:</h1>
+                <footer class="jumbotron">
+                    <h1 class="ml-n3">5-Day Forecast for <span class="city"></span></h1>
+                    
+                </footer>
+                <div class="col-12"></div>
+                    
                     <div class="row d-flex justify-content-between text-center">
                         <div
-                            class="col-12 mb-2 col-md-2 border border-primary bg-primary font-weight-bold rounded-lg p-2 pb-3">
+                            class="col-12 mb-2 col-md-2 border border-primary bg-primary font-weight-bold rounded-md p-2 pb-3">
                             <div class="cards display-4">(<span class="day1"></span>)</div>
                             <!-- this is where the icon will go  -->
                             <div><img alt="weather icon, check description for details" src="#"
                                     class="img-fluid mt-2 icon1"></div>
                                     <div><span class="description1 descriptionWeight "></span></div>
                             <div class="mt-2">Temperature: <span class="temp1"></span>&deg;F</div>
-                            <div class="mt-2">Humidity : <span class="humidity1"></span>%</div>
-                        </div>
+                            <div class="mt-2">Wind Speeds : <span class="wind"></span> MPH</div>
+                            <div class="mt-2">Humidity : <span class="humidity0"></span>%</div>
+                            </div>
                         <div
                             class="col-12 mb-2 col-md-2 border border-primary bg-primary font-weight-bold rounded-lg p-2 pb-3">
                             <div class="cards display-4">(<span class="day2"></span>)</div>
@@ -90,7 +82,8 @@
                                     class="img-fluid mt-2 icon2"></div>
                                     <div><span class="description2 descriptionWeight "></span></div>
                             <div class="mt-2">Temperature: <span class="temp2"></span>&deg;F</div>
-                            <div class="mt-2">Humidity : <span class="humidity2"></span>%</div>
+                            <div class="mt-2">Wind Speeds : <span class="wind"></span> MPH</div>
+                            <div class="mt-2">Humidity : <span class="humidity0"></span>%</div>
                         </div>
                         <div
                             class="col-12 mb-2 col-md-2 border border-primary bg-primary font-weight-bold rounded-lg p-2 pb-3">
@@ -100,7 +93,8 @@
                                     class="img-fluid mt-2 icon3"></div>
                                     <div><span class="description3 descriptionWeight "></span></div>
                             <div class="mt-2">Temperature: <span class="temp3"></span>&deg;F</div>
-                            <div class="mt-2">Humidity : <span class="humidity3"></span>%</div>
+                            <div class="mt-2">Wind Speeds : <span class="wind"></span> MPH</div>
+                            <div class="mt-2">Humidity : <span class="humidity0"></span>%</div>
                         </div>
                         <div
                             class="col-12 mb-2 col-md-2 border border-primary bg-primary font-weight-bold rounded-lg p-2 pb-3">
@@ -110,7 +104,8 @@
                                     class="img-fluid mt-2 icon4"></div>
                                     <div><span class="description4 descriptionWeight "></span></div>
                             <div class="mt-2">Temperature: <span class="temp4"></span>&deg;F</div>
-                            <div class="mt-2">Humidity : <span class="humidity4"></span>%</div>
+                            <div class="mt-2">Wind Speeds : <span class="wind"></span> MPH</div>
+                            <div class="mt-2">Humidity : <span class="humidity0"></span>%</div>
                         </div>
                         <div
                             class="col-12 mb-2 col-md-2 border border-primary bg-primary font-weight-bold rounded-lg p-2 pb-3">
@@ -120,7 +115,8 @@
                                     class="img-fluid mt-2 icon5"></div>
                                     <div><span class="description5 descriptionWeight "></span></div>
                             <div class="mt-2">Temperature: <span class="temp5"></span>&deg;F</div>
-                            <div class="mt-2">Humidity : <span class="humidity5"></span>%</div>
+                            <div class="mt-2">Wind Speeds : <span class="wind"></span> MPH</div>
+                            <div class="mt-2">Humidity : <span class="humidity0"></span>%</div>
                         </div>
                     </div>
                 </div>

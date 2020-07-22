@@ -9,7 +9,14 @@ body {
     background-color: transparent;
     color: rgb(42, 160, 130);
     border-radius: 0;
-    border-bottom: 10px solid black;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    border-right: 2px solid black;
+    border-left: 2px solid black;
+    padding-top: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 2rem;
   }
   textarea{
     background: transparent;
@@ -17,7 +24,7 @@ body {
     resize: none;
     color: #000000;
     border-left: 1px solid black;
-    padding: 10px;
+    padding: 5px;
   }
   .listbtn{
     background-color: #3d6488;
@@ -36,7 +43,7 @@ body {
     height: 100%; 
 }
 
-.card-body{
+.card-display{
     background-color: #3d6488;
     color: white;
 }
